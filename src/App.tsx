@@ -14,8 +14,8 @@ function App() {
       <Router>
         <AuthProvider>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/tasks" element={<ProtectedRoute><MainPage /></ProtectedRoute>} />
+          <Route path="/todolist/login" element={<LoginPage />} />
+          <Route path="/todolist/tasks" element={<ProtectedRoute><MainPage /></ProtectedRoute>} />
           <Route path="*" element={<LoginPage />} />
         </Routes>
         </AuthProvider>

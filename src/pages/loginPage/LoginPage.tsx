@@ -47,7 +47,7 @@ export const LoginPage = () => {
             // Если авторизация успешна, сохраняем токен и данные пользователя
             const { token, user } = response.data;
             authLogin(token, user);
-            navigate('/tasks');
+            navigate('/todolist/tasks');
         } catch (err) {
             if (axios.isAxiosError(err)) {
                 // Обработка ошибок Axios
@@ -63,10 +63,10 @@ export const LoginPage = () => {
                     }
                 } else if (err.request) {
                     // Запрос был отправлен, но ответ не получен
-                    setError('Сервер не отвечает');
+                    setError('Сервер не отвечает. Обновите приложение.');
                 } else {
                     // Ошибка при настройке запроса
-                    setError('Ошибка при отправке запроса');
+                    setError('Ошибка при отправке запроса. Обновите приложение.');
                 }
             } else {
                 // Обработка других ошибок
