@@ -72,3 +72,13 @@
 .error {
     border-bottom: 1px solid red;
 }
+.login-page-container-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .login-page-icon {
+    width: 35px;
+    vertical-align: middle;
+  }

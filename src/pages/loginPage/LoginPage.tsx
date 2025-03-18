@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login-page.css';
 import { useAuth } from "../../components/authProvider/AuthProvider";
 import axios from 'axios'
+import  Icon  from '../../assets/esoft-icon.png'
 
 export const LoginPage = () => {
     const [login, setLogin] = useState<string>('');
@@ -79,7 +80,9 @@ export const LoginPage = () => {
     return (
         <div className="login-page">
             <div className="login-page-container">
-                <h1 className="login-page-container-header">Task Manager</h1>
+                <h1 className="login-page-container-header">
+                    <img src={Icon} alt="Task Manager Icon" className="login-page-icon" />
+                    Task Manager</h1>
                 <form onSubmit={handleSubmit} className="login-page-container-form">
                     <div className={`login-page-container-form--login ${error === 'Пользователя с таким логином не существует' ? 'error' : ''}`}>
                         <input
