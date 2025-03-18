@@ -1,6 +1,6 @@
 
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './components/authProvider/AuthProvider';
 import { LoginPage } from './pages/loginPage/LoginPage'
 import { MainPage } from './pages/mainPage/MainPage';
@@ -11,7 +11,7 @@ function App() {
 
   return (
     
-      <Router>
+      // <Router>
         <AuthProvider>
         <Routes>
           <Route path="/todolist/login" element={<LoginPage />} />
@@ -19,7 +19,7 @@ function App() {
           <Route path="*" element={<LoginPage />} />
         </Routes>
         </AuthProvider>
-      </Router>
+      // </Router>
     
   )
 }
