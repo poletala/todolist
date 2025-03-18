@@ -5,9 +5,9 @@ import './main-page.css';
 import axios from "axios";
 import { useAuth } from "../../components/authProvider/AuthProvider";
 import Loader from "../../components/loader/Loader";
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
-const socket = io('/')
+// const socket = io('/')
 
 interface TaskListProps {
     tasks?: Task[];
@@ -31,33 +31,33 @@ export const MainPage: React.FC<TaskListProps> = () => {
     }, [user]);
 
     // Подключение к WebSocket и обработка событий
-    useEffect(() => {
-        // Событие для новой задачи
-        socket.on('newTask', (newTask) => {
-            setTasks((prevTasks) => {
-                const taskExists = prevTasks.some((task) => task.id === newTask.id);
-                if (!taskExists) {
-                    return [newTask, ...prevTasks];
-                }
-                return prevTasks;
-            });
-        });
+    // useEffect(() => {
+    //     // Событие для новой задачи
+    //     socket.on('newTask', (newTask) => {
+    //         setTasks((prevTasks) => {
+    //             const taskExists = prevTasks.some((task) => task.id === newTask.id);
+    //             if (!taskExists) {
+    //                 return [newTask, ...prevTasks];
+    //             }
+    //             return prevTasks;
+    //         });
+    //     });
 
-        // Событие для обновленной задачи
-        socket.on('taskUpdated', (updatedTask) => {
-            setTasks((prevTasks) =>
-                prevTasks.map((task) =>
-                    task.id === updatedTask.id ? updatedTask : task
-                )
-            );
-        });
+    //     // Событие для обновленной задачи
+    //     socket.on('taskUpdated', (updatedTask) => {
+    //         setTasks((prevTasks) =>
+    //             prevTasks.map((task) =>
+    //                 task.id === updatedTask.id ? updatedTask : task
+    //             )
+    //         );
+    //     });
 
-        // Отключение слушателей при размонтировании компонента
-        return () => {
-            socket.off('newTask');
-            socket.off('taskUpdated');
-        };
-    }, []);
+    //     // Отключение слушателей при размонтировании компонента
+    //     return () => {
+    //         socket.off('newTask');
+    //         socket.off('taskUpdated');
+    //     };
+    // }, []);
 
     // При изменении группировки сбрасываем раскрытые группы и прокручиваем в начало
     useEffect(() => {
