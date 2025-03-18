@@ -1,0 +1,182 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+    opacity: 1;
+}
+.modal-overlay.close {
+    opacity: 0;
+}
+.modal {
+    background: white;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 500px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+.modal.open {
+    transform: translateY(0);
+}
+.modal.close {
+    transform: translateY(100%);
+}
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.modal .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.modal label {
+    flex: 1;
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+}
+.modal input,
+.modal select,
+.modal textarea {
+    flex: 2;
+    padding: 8px;
+    border: 1px solid var( --light-background-color);
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.3s ease, all 0.3s ease;
+}
+.modal input:focus,
+.modal select:focus,
+.modal textarea {
+    border-color: var(--background-color);
+    outline: none;
+}
+.modal .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: auto;
+}
+.modal button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.modal button[type="button"] {
+    background-color: var(--light-background-color);
+    color: white;
+}
+  
+.modal button[type="button"]:hover {
+    background-color: var(--background-color);
+}
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 30px 8px 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+select:hover {
+    border-color: var(--light-background-color);
+}
+select:focus {
+    border-color: var(--light-background-color);
+    box-shadow: 0 0 5px rgba(126, 142, 159, 0.5);
+    outline: none;
+}
+select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+}
+option:hover {
+    background-color: var(--light-background-color);
+    color: #fff;
+}
+option:checked {
+    background-color: var(--background-color);
+    color: #fff;
+}
+
+@media (max-width: 426px) {
+    .modal {
+        width: 90%; /* Уменьшаем ширину модального окна */
+        padding: 15px; /* Уменьшаем внутренние отступы */
+    }
+
+    .modal h2 {
+        font-size: 20px; /* Уменьшаем размер заголовка */
+    }
+
+    .modal .form-group {
+        flex-direction: column; /* Убираем горизонтальное выравнивание */
+        align-items: flex-start; /* Выровнять элементы в начале */
+    }
+
+    .modal label {
+        text-align: left; /* Выравниваем текст налево */
+        margin-bottom: 5px; /* Добавляем нижний отступ */
+    }
+
+    .modal input,
+    .modal select,
+    .modal textarea {
+        width: 100%; /* Устанавливаем ширину на 100% */
+        font-size: 12px; /* Уменьшаем размер шрифта */
+    }
+
+
+
+    .modal button {
+        width: 100%; /* Кнопку на 100% ширины */
+        margin-bottom: 10px; /* Отступ между кнопками */
+    }
+
+    .modal button:last-child {
+        margin-bottom: 0; /* Убираем отступ у последней кнопки */
+    }
+    .task-list-container button {
+        height: 31px;
+    }
+}

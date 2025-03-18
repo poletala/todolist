@@ -1,0 +1,25 @@
+:root {
+  font-family: Montserrat, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  /* background-color: var(--light-background-color); */
+  background: linear-gradient(135deg, #6a11cb, #872277);
+
+  --text-color: white;
+  --background-color: #532881;
+  --light-background-color: #9D69D6;
+  --extra-light-background-color: #EED5FD;
+  --high-priority-color: #872277;
+  --medium-priority-color: #BFB630;
+  --low-priority-color: #9AB72E;
+
+  --done-tasks-color: #269926;
+  --in-progress-tasks-color: #5f6b88;
+  --overdue-tasks-color: #BF3030;
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

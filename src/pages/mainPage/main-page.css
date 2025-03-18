@@ -1,0 +1,162 @@
+.task-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Убираем прокрутку у основного контейнера */
+}
+
+.task-list-container-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.task-list-container-header-userinfo {
+  display: flex;
+  align-self: flex-end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.task-list-container-header-userinfo span {
+  font-size: 15px;
+  color: #444;
+  align-self: center;
+}
+
+.task-list-container h1 {
+  text-align: center;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.task-list-container button {
+  background-color: var(--light-background-color);
+  color: white;
+  border: none;
+  padding: 6px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.task-list-container button:hover {
+  background-color: var(--background-color);
+}
+
+.task-list-container-group-wrapper {
+  flex-grow: 1; /* Занимает оставшееся пространство */
+  overflow-y: auto; /* Добавляем прокрутку внутри контейнера групп */
+  max-height: calc(100vh - 200px); /* Ограничиваем высоту, чтобы не выходить за пределы экрана */
+}
+
+/* Скрываем скролл */
+.task-list-container-group-wrapper {
+  scrollbar-width: none; /* Для Firefox */
+}
+.task-list-container-group-wrapper::-webkit-scrollbar {
+  display: none; /* Для Chrome, Safari и других WebKit-браузеров */
+}
+/* Анимация раскрытия/скрытия */
+.task-group-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  max-height: 0;
+  opacity: 0;
+}
+
+.task-group-content.open {
+  max-height: 1000px; /* Максимальная высота для анимации */
+  opacity: 1;
+}
+
+/* Стиль для сообщения "Задач нет" */
+.no-tasks-message {
+  color: #888;
+  font-style: italic;
+  padding: 10px;
+  text-align: center;
+}
+.task-list-container-group {
+  margin: 20px;
+  position: relative;
+}
+
+.task-list-container-group h2 {
+  color: #555;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--background-color);
+  padding-bottom: 5px;
+}
+
+.task-list-container-group-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list-container-group-list li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.task-list-container-group-list li:hover {
+  background-color: var(--extra-light-background-color);
+  transform: translateX(5px);
+}
+
+.task-item-title {
+  display: inline-block;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+.task-item-info {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.task-item-info span {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0px 8px;
+  border: 1px solid var(--light-background-color);
+  opacity: 0.7;
+  font-size: 12px;
+}
+.task-list-container-sort {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 376px) {
+  .task-list-container button {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  .task-item-info span {
+    padding: 0px 4px;
+    font-size: 11px;
+}
+  
+}
