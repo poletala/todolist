@@ -8,9 +8,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Убираем прокрутку у основного контейнера */
+  overflow: hidden;
 }
-
 .task-list-container-header {
   display: flex;
   flex-direction: column;
@@ -18,26 +17,22 @@
   align-items: center;
   margin-bottom: 20px;
 }
-
 .task-list-container-header-userinfo {
   display: flex;
   align-self: flex-end;
   justify-content: center;
   gap: 10px;
 }
-
 .task-list-container-header-userinfo span {
   font-size: 15px;
   color: #444;
   align-self: center;
 }
-
 .task-list-container h1 {
   text-align: center;
   color: #444;
   margin-bottom: 10px;
 }
-
 .task-list-container button {
   background-color: var(--light-background-color);
   color: white;
@@ -49,38 +44,30 @@
   font-size: 12px;
   transition: background-color 0.3s ease;
 }
-
 .task-list-container button:hover {
   background-color: var(--background-color);
 }
-
 .task-list-container-group-wrapper {
-  flex-grow: 1; /* Занимает оставшееся пространство */
-  overflow-y: auto; /* Добавляем прокрутку внутри контейнера групп */
+  flex-grow: 1;
+  overflow-y: auto;
   max-height: calc(100vh - 200px); /* Ограничиваем высоту, чтобы не выходить за пределы экрана */
 }
-
-/* Скрываем скролл */
 .task-list-container-group-wrapper {
-  scrollbar-width: none; /* Для Firefox */
+  scrollbar-width: none; 
 }
 .task-list-container-group-wrapper::-webkit-scrollbar {
-  display: none; /* Для Chrome, Safari и других WebKit-браузеров */
+  display: none;
 }
-/* Анимация раскрытия/скрытия */
 .task-group-content {
   overflow: hidden;
   transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
   max-height: 0;
   opacity: 0;
 }
-
 .task-group-content.open {
-  max-height: 1000px; /* Максимальная высота для анимации */
+  max-height: 1000px;
   opacity: 1;
 }
-
-/* Стиль для сообщения "Задач нет" */
 .no-tasks-message {
   color: #888;
   font-style: italic;
@@ -91,7 +78,6 @@
   margin: 20px;
   position: relative;
 }
-
 .task-list-container-group h2 {
   color: #555;
   font-size: 18px;
@@ -99,13 +85,11 @@
   border-bottom: 2px solid var(--background-color);
   padding-bottom: 5px;
 }
-
 .task-list-container-group-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
 .task-list-container-group-list li {
   background-color: #f9f9f9;
   padding: 10px;
@@ -114,12 +98,10 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 .task-list-container-group-list li:hover {
   background-color: var(--extra-light-background-color);
   transform: translateX(5px);
 }
-
 .task-item-title {
   display: inline-block;
   border-radius: 50%;
@@ -127,7 +109,6 @@
   height: 10px;
   margin-right: 10px;
 }
-
 .task-item-info {
   display: flex;
   justify-content: flex-end;
@@ -135,7 +116,6 @@
   color: #555;
   margin-top: 10px;
 }
-
 .task-item-info span {
   display: inline-block;
   border-radius: 4px;
@@ -157,6 +137,5 @@
   .task-item-info span {
     padding: 0px 4px;
     font-size: 11px;
-}
-  
+  }
 }

@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+import { ReactNode, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../authProvider/AuthProvider';
-import { ClipLoader } from 'react-spinners'; // Импортируем спиннер
+import Loader from '../loader/Loader';
 
 interface ProtectedRouteProps {
     children: ReactNode;
@@ -9,21 +10,30 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     const { user, isLoading } = useAuth();
+    const navigate = useNavigate();
 
-    // Если проверка авторизации ещё не завершена, показываем спиннер
+    useEffect(() => {
+        if (!isLoading && !user) {
+            navigate('/login', { replace: true });
+        }
+    }, [user, isLoading, navigate]);
+
+    // Если проверка авторизации ещё не завершена, показываем лоадер
     if (isLoading) {
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <ClipLoader color="#36d7b7" size={50} /> {/* Используем ClipLoader */}
+            <div 
+                style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    height: '100vh' 
+                }}
+            >
+                <Loader/>
             </div>
         );
     }
 
-    // Если пользователь не авторизован, перенаправляем на страницу входа
-    if (!user) {
-        return <Navigate to="/login" replace />;
-    }
-
     // Если пользователь авторизован, отображаем дочерний компонент
-    return children;
+    return user ? children : null;
 };

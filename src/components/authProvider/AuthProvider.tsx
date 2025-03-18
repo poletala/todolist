@@ -1,26 +1,22 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface AuthContextType {
-    token: string | null;
-    user: { id: number; first_name: string; last_name: string; manager_id: number | null; hasSubordinates: boolean; } | null;
-    isLoading: boolean; // Добавляем состояние загрузки
-    login: (token: string, user: any) => void;
-    logout: () => void;
-}
+import { AuthContextType } from '../../types';
 
+// Создание контекста
 const AuthContext = createContext<AuthContextType | null>(null);
 
+// Провайдер для управления авторизацией
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
     const [user, setUser] = useState<any>(() => {
         const userData = localStorage.getItem('user');
         return userData ? JSON.parse(userData) : null;
     });
-    const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Проверка авторизации при монтировании компонента
+    // Проверка авторизации при загрузке
     useEffect(() => {
         const checkAuth = () => {
             const storedToken = localStorage.getItem('token');
@@ -33,12 +29,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setToken(null);
                 setUser(null);
             }
-            setIsLoading(false); // Завершаем загрузку
+            setIsLoading(false);
         };
 
         checkAuth();
     }, []);
 
+    // Вход пользователя
     const login = (newToken: string, newUser: any) => {
         localStorage.setItem('token', newToken);
         localStorage.setItem('user', JSON.stringify(newUser));
@@ -46,14 +43,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(newUser);
     };
 
+    // Выход пользователя
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setToken(null);
         setUser(null);
-        navigate('/todolist/login');
+        navigate('/login'); 
     };
 
+    // Возвращаем провайдер с текущими значениями
     return (
         <AuthContext.Provider value={{ token, user, isLoading, login, logout }}>
             {children}
@@ -61,10 +60,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
+// Хук для использования контекста авторизации
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
+        throw new Error('useAuth must be used within an AuthProvider'); // Ошибка, если хук используется вне провайдера
     }
     return context;
 };

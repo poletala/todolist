@@ -1,5 +1,5 @@
 export interface Task {
-  id: string;
+  id: number;
   title: string;
   priority: "низкий" | "средний" | "высокий";
   due_date: string;
@@ -16,3 +16,11 @@ export interface Task {
 
   
   export type GroupingType = "date" | "responsible" | "none";
+
+export interface AuthContextType {
+    token: string | null;
+    user: { id: number; first_name: string; last_name: string; manager_id: number | null; hasSubordinates: boolean; } | null; // Данные пользователя
+    isLoading: boolean;
+    login: (token: string, user: any) => void;
+    logout: () => void;
+}  

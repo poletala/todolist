@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Task } from "../../types";
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import { Task } from '../../types';
+
 import './task-modal.css';
 
 interface TaskModalProps {
@@ -93,7 +95,7 @@ export const TaskModal: React.FC<TaskModalProps> = ({
         }
 
         const newTask: Task = {
-            id: task?.id || '',
+            id: task?.id || 0,
             title,
             priority,
             due_date: dueDate,

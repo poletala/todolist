@@ -1,4 +1,4 @@
-import { DotLoader } from "react-spinners";
+import { DotLoader } from 'react-spinners';
 const Loader = () => {
     return (
         <DotLoader

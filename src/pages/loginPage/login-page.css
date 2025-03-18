@@ -4,7 +4,6 @@
     align-items: center;
     /* height: auto; */
     /* padding: 40px; */
-
 }
 .login-page-container {
     width: 300px;
@@ -33,7 +32,7 @@
     gap: 10px;
 }
 .login-page-container-form--login,
- .login-page-container-form--password {
+.login-page-container-form--password {
     width: 100%;
 }
 .login-page-container-form--login input,
@@ -76,9 +75,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  .login-page-icon {
+}
+.login-page-icon {
     width: 35px;
     vertical-align: middle;
-  }
+}

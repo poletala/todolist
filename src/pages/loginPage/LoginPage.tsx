@@ -1,34 +1,45 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import { useAuth } from '../../components/authProvider/AuthProvider';
+import Icon from '../../assets/esoft-icon.png';
+
 import './login-page.css';
-import { useAuth } from "../../components/authProvider/AuthProvider";
-import axios from 'axios'
-import  Icon  from '../../assets/esoft-icon.png'
 
 export const LoginPage = () => {
+    // Состояния для хранения логина, пароля и ошибки
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
+
+    // Используем хук useAuth для доступа к функции login
     const { login: authLogin } = useAuth();
+
     const navigate = useNavigate();
 
+    // Обработчик изменения логина
     const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLogin(event.target.value);
+        // Если ошибка была связана с логином, сбрасываем её
         if (error === 'Пользователя с таким логином не существует') {
             setError('');
         }
     };
 
+    // Обработчик изменения пароля
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
+        // Если ошибка была связана с паролем, сбрасываем её
         if (error === 'Неверный пароль') {
             setError('');
         }
     };
 
+    // Обработчик отправки формы
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(''); // Сбрасываем ошибку перед отправкой запроса
+        setError('');
 
         try {
             const response = await axios.post('/api/login', {
@@ -36,22 +47,21 @@ export const LoginPage = () => {
                 password,
             }, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // Указываем тип содержимого
                 },
             });
-        
-            console.log('Логин и пароль:', login, password); // Логируем введенные данные
-        
-            // Логируем ответ сервера
+
+            // Логируем данные для отладки
+            console.log('Логин и пароль:', login, password);
             console.log('Response:', response.data);
-        
+
             // Если авторизация успешна, сохраняем токен и данные пользователя
             const { token, user } = response.data;
-            authLogin(token, user);
-            navigate('/todolist/tasks');
+            authLogin(token, user); // Вызываем функцию login из AuthProvider
+            navigate("/todolist/tasks");
         } catch (err) {
+            // Обработка ошибок
             if (axios.isAxiosError(err)) {
-                // Обработка ошибок Axios
                 if (err.response) {
                     // Сервер вернул ответ с ошибкой
                     const errorData = err.response.data;
@@ -66,14 +76,13 @@ export const LoginPage = () => {
                     // Запрос был отправлен, но ответ не получен
                     setError('Сервер не отвечает. Обновите приложение.');
                 } else {
-                    // Ошибка при настройке запроса
                     setError('Ошибка при отправке запроса. Обновите приложение.');
                 }
             } else {
                 // Обработка других ошибок
                 setError(err instanceof Error ? err.message : 'Ошибка при входе');
             }
-            console.error('Ошибка при входе:', err);
+            console.error('Ошибка при входе:', err); // Логируем ошибку для отладки
         }
     };
 
@@ -81,10 +90,22 @@ export const LoginPage = () => {
         <div className="login-page">
             <div className="login-page-container">
                 <h1 className="login-page-container-header">
-                    <img src={Icon} alt="Task Manager Icon" className="login-page-icon" />
-                    Task Manager</h1>
-                <form onSubmit={handleSubmit} className="login-page-container-form">
-                    <div className={`login-page-container-form--login ${error === 'Пользователя с таким логином не существует' ? 'error' : ''}`}>
+                    <img 
+                        src={Icon} 
+                        alt="Esoft Icon" 
+                        className="login-page-icon" 
+                    />
+                    Task Manager
+                </h1>
+                <form 
+                    onSubmit={handleSubmit} 
+                    className="login-page-container-form"
+                >
+                    <div 
+                        className={`login-page-container-form--login ${error === 'Пользователя с таким логином не существует' 
+                        ? 'error' 
+                        : ''}`}
+                    >
                         <input
                             type="text"
                             id="login"
@@ -93,7 +114,11 @@ export const LoginPage = () => {
                             onChange={handleLoginChange}
                         />
                     </div>
-                    <div className={`login-page-container-form--password ${error === 'Неверный пароль' ? 'error' : ''}`}>
+                    <div 
+                        className={`login-page-container-form--password ${error === 'Неверный пароль' 
+                        ? 'error' 
+                        : ''}`}
+                    >
                         <input
                             type="password"
                             id="password"
@@ -102,13 +127,18 @@ export const LoginPage = () => {
                             onChange={handlePasswordChange}
                         />
                     </div>
-                        {error ? (
-                            <p className="login-page-container-form--error">{error}</p>
-                            ) : (
-                            <button type="submit" className="login-page-container-form-submit">
-                                Войти
-                            </button>
-                        )}
+                    {error ? (
+                        <p className="login-page-container-form--error">
+                            {error}
+                        </p>
+                    ) : (
+                        <button 
+                            type="submit" 
+                            className="login-page-container-form-submit"
+                        >
+                            Войти
+                        </button>
+                    )}
                 </form>
             </div>
         </div>
